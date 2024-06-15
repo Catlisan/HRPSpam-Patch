@@ -20,3 +20,4 @@ C:\Users\Asus\source\repos\HRP Spam Patch\HRP Spam Patch\obj\Debug\net8.0\HRP Sp
 C:\Users\Asus\source\repos\HRP Spam Patch\HRP Spam Patch\obj\Debug\net8.0\refint\HRP Spam Patch.dll
 C:\Users\Asus\source\repos\HRP Spam Patch\HRP Spam Patch\obj\Debug\net8.0\HRP Spam Patch.pdb
 C:\Users\Asus\source\repos\HRP Spam Patch\HRP Spam Patch\obj\Debug\net8.0\ref\HRP Spam Patch.dll
+C:\Users\Asus\source\repos\HRP Spam Patch\HRP Spam Patch\obj\Debug\net8.0\HRP Spam Patch.sourcelink.json

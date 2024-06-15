@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HRP Spam Patch")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48dfe0764bc608a5759eb38b44c6a8f03082c185")]
 [assembly: System.Reflection.AssemblyProductAttribute("HRP Spam Patch")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HRP Spam Patch")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
