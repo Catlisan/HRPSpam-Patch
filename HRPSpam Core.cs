@@ -1,18 +1,20 @@
 ﻿using Content.Shared.Administration;
 using Robust.Shared.Console;
 using HarmonyLib;
+
 public static class SubverterPatch
 {
     public static string Name = "HRPSpam Patch";
     public static string Description = "spamit";
     public static Harmony Harm = new("HRPSpamCore");
 }
+
 [AnyCommand]
 public class HighRolePlayCommand : IConsoleCommand
 {
     public string Command => "starthrpspam";
     public string Description => "Сделает из вас HRP-шного пацана, By catlisan";
-    public string Help => "если тебе нужна помощь в этой команде";
+    public string Help => "starthrpspam <1|2>: 1 - включает сердцебиение, 2 - отключает сердцебиение";
 
     private static volatile bool _shouldStop;
 
@@ -20,13 +22,23 @@ public class HighRolePlayCommand : IConsoleCommand
     {
         _shouldStop = false;
 
-        // Запуск всего асинхронно,чтобы все работало чики-пуки
-        var tasks = new Task[]
+        if (args.Length < 1 || !int.TryParse(args[0], out int mode) || (mode != 1 && mode != 2))
         {
-                Task.Run(() => HeartbeatSpam(shell)),
-                Task.Run(() => BlinkSpam(shell)),
-                Task.Run(() => BreatheSpam(shell))
+            shell.WriteLine("Использование: starthrpspam <1|2>");
+            return;
+        }
+
+        // Запуск всего асинхронно, чтобы все работало чики-пуки
+        var tasks = new List<Task>
+        {
+            Task.Run(() => BlinkSpam(shell)),
+            Task.Run(() => BreatheSpam(shell))
         };
+
+        if (mode == 1)
+        {
+            tasks.Add(Task.Run(() => HeartbeatSpam(shell)));
+        }
 
         // Ожидание завершения всех задач
         await Task.WhenAll(tasks);
@@ -36,7 +48,7 @@ public class HighRolePlayCommand : IConsoleCommand
     {
         for (int i = 0; i < 999999 && !_shouldStop; i++)
         {
-            await Task.Delay(1800);
+            await Task.Delay(2600);
             if (_shouldStop) break;
             shell.ExecuteCommand("me сердечное сокращение");
         }
@@ -48,7 +60,9 @@ public class HighRolePlayCommand : IConsoleCommand
         {
             await Task.Delay(15000);
             if (_shouldStop) break;
-            shell.ExecuteCommand("me моргнул");
+            shell.ExecuteCommand("me закрыл глаза");
+            await Task.Delay(25);
+            shell.ExecuteCommand("me открыл глаза");
         }
     }
 
@@ -64,7 +78,8 @@ public class HighRolePlayCommand : IConsoleCommand
             shell.ExecuteCommand("me вздыхает");
         }
     }
-    //стопит всю эту мишуру,при вызове метода
+
+    // Стопит всю эту мишуру, при вызове метода
     public static void StopSpam()
     {
         _shouldStop = true;
